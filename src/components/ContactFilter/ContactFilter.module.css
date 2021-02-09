@@ -1,0 +1,14 @@
+.input {
+  font-size: 15px;
+  width: 150px;
+  margin: 15px;
+  margin-left: 0px;
+}
+.input:focus,
+.input:hover {
+  border: 2px solid blueviolet;
+  border-radius: 5px;
+}
+.label {
+  margin-left: 15px;
+}

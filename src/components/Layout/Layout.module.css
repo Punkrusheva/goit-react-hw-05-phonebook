@@ -1,0 +1,13 @@
+.layout {
+  max-width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 0;
+  padding: 15px;
+  height: 100vh;
+  background: #e8edf2;
+}
+
+h2 {
+  margin-top: 0;
+}
