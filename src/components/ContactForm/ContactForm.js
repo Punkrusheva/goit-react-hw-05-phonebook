@@ -29,7 +29,7 @@ class ContactForm extends Component {
   render() {
     return (
       <>
-        <h2>Phonebook</h2>
+        <h2 className={styles.title}>Phonebook</h2>
       <form className={styles.box} onSubmit={this.handleSubmit} >
         <label htmlFor={this.nameInputId} className={styles.name}>
           Name

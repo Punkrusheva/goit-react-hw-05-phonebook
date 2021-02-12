@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './ContactList.module.css';
 
+import { AiOutlineClose } from 'react-icons/ai';
+
 function ContactList({ contacts, onRemoveContact }) {
   return (
     <ul className={styles.contactList}>
@@ -14,7 +16,7 @@ function ContactList({ contacts, onRemoveContact }) {
               type='button'
               onClick={() => onRemoveContact(id)}
               className={styles.button}>
-              Delete
+              <AiOutlineClose fill="white"/>
             </button>
             <section className={styles.actions}>
             </section>

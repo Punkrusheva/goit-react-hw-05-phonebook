@@ -1,11 +1,12 @@
 .layout {
-  max-width: 100vw;
+  max-width: 600px;
+  height: 100vh;
+  margin: 0;
   margin-left: auto;
   margin-right: auto;
-  margin: 0;
-  padding: 15px;
-  height: 100vh;
-  background: #e8edf2;
+
+  padding: 10px;
+  background: #fff;
 }
 
 h2 {
