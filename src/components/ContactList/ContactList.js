@@ -10,7 +10,7 @@ function ContactList({ contacts, onRemoveContact }) {
     <TransitionGroup component="ul" className={styles.contactList}>
       {contacts.map(({ name, id, number }) => (
         <CSSTransition key={id} timeout={250} classNames="item">
-          <ContactListItem name={name} key={id} number={number} onClick={() => onRemoveContact(id)}>
+          <ContactListItem name={name} id={id} number={number} onClick={() => onRemoveContact(id)}>
           </ContactListItem>
           </CSSTransition>
         ))
