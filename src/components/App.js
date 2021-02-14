@@ -5,8 +5,6 @@ import ContactForm from './ContactForm/ContactForm';
 import ContactFilter from './ContactFilter/ContactFilter';
 import AlertError from "./AlertError/AlertError";
 import shortid from 'shortid';
- import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { CSSTransition } from "react-transition-group";
 import "../stylesheets/animation.css";
 
@@ -14,12 +12,10 @@ export default class App extends Component {
   state = {
     filter: '',
     contacts: [],
-    showContactFilter: false,
     alert: false,
   }
  
   componentDidMount() {
-    console.log('Загрузка страницы! Нужна анимация!');
     const contacts = localStorage.getItem('contacts');
     const parsedContacts = JSON.parse(contacts);
 
@@ -42,8 +38,8 @@ export default class App extends Component {
   };
   
   formSubmitHandler = ({ name, number }) => {
-    //this.setState(state => ({ alert: false}));
-    console.log(this.state.alert);
+    const afertFalse = () => {
+      this.setState(state => ({ alert: false }))};
     localStorage.getItem('contacts');
     this.contactId = shortid.generate();
     const contact = {
@@ -53,12 +49,9 @@ export default class App extends Component {
     };
     if (contact.name !== '') {
       if (this.state.contacts.find(contact => contact.name === name)) {
-        console.log('Контакт уже существует! Нужна анимация!');
         this.setState(state => ({ alert: true}));
         console.log(this.state.alert);
-       // this.setState(state => ({ showContactFilter: !state.showContactFilter }));
-       // toast.error('Contact is already exist');
-        return;
+        setTimeout(afertFalse, 2500);       
       }
       else {
         this.setState(prevState => {
@@ -80,7 +73,7 @@ export default class App extends Component {
       return {
         contacts: prevState.contacts.filter(({ id }) => id !== contactId),
       };
-    }); console.log('Контакт удален! Нужна анимация!');
+    });
   };
 
   getVisibleContacts = () => {
@@ -91,12 +84,8 @@ export default class App extends Component {
     );
   };
 
-  toggleFilter = () => {
-    this.setState(state => ({ showContactFilter: !state.showContactFilter }));
-  };
-  
   render() {
-    const { contacts, filter, showContactFilter, alert } = this.state;
+    const { contacts, filter, alert } = this.state;
     
     const visibleContacts = this.getVisibleContacts();
 
@@ -105,18 +94,18 @@ export default class App extends Component {
         <ContactForm
           onSubmit={this.formSubmitHandler}
         />
-        
-        <ToastContainer position="top-right"
-          autoClose={2500}
-          hideProgressBar={false} />
-        
+                
         <CSSTransition in={alert}
           classNames="alert"
           timeout={2500}
           unmountOnExit>
-          {state => {
+          {stage => {
+            console.log(stage); console.log(alert);
             return (
-              <CSSTransition in={alert} timeout={2500} unmountOnExit>
+              <CSSTransition
+                in={stage === 'entered'}
+                classNames="alert"
+                timeout={2500}  >
                 <AlertError />
               </CSSTransition>)
           }}

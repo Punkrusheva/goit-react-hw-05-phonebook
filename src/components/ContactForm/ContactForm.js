@@ -67,14 +67,10 @@ class ContactForm extends Component {
             <button type='submit' className={styles.button}>
               Add contact
             </button>
-          
         </form>
-         
         </>
     );
   }
 }
 
 export default ContactForm;
-
-/**unmountOnExit timeout="2000" */

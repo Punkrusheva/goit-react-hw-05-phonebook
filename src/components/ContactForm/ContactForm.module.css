@@ -54,23 +54,3 @@ label {
   margin-bottom: 15px;
   color: blue;
 }
-
-/*
-.box-enter {
-  opacity: 0;
-}
-
-.box-enter-active {
-  opacity: 1;
-  transition: opacity 5000ms linear;
-}
-
-.box-exit {
-  opacity: 1;
-}
-
-.box-exit-active {
-  opacity: 0;
-  transition: opacity 5000ms linear;
-}
-*/

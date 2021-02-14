@@ -4,9 +4,9 @@ import styles from './Layout.module.css';
 
 function Layout({ children}) {
     return (
-            <div className={styles.layout} >
-                {children}
-            </div>)
+      <div className={styles.layout} >
+        {children}
+      </div>)
 }
 
 Layout.defaultProps = {

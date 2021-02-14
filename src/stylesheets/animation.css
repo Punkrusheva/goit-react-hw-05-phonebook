@@ -29,6 +29,26 @@
   transition: transform 250ms linear;
 }
 
+/* Alert */
+
+.alert-enter {
+  transform: translateX(100%);
+}
+
+.alert-enter-active {
+  transform: translateX(0);
+  transition: transform 250ms linear;
+}
+
+.alert-exit {
+  transform: translateX(0);
+}
+
+.alert-exit-active {
+  transform: translateX(100%);
+  transition: transform 250ms linear;
+}
+
 /* Анимация фильтра (для тренеровки)*/
 
 .filter-enter {
@@ -63,24 +83,4 @@
   opacity: 1;
   transform: translateX(0);
   transition: opacity 1000ms linear;
-}
-
-/* Alert*/
-
-.alert-enter {
-  transform: translateX(100%);
-}
-
-.alert-enter-active {
-  transform: translateX(0);
-  transition: transform 250ms linear;
-}
-
-.alert-exit {
-  transform: translateX(0);
-}
-
-.alert-exit-active {
-  transform: translateX(100%);
-  transition: transform 250ms linear;
 }
