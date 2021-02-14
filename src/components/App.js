@@ -4,18 +4,34 @@ import ContactList from './ContactList/ContactList'
 import ContactForm from './ContactForm/ContactForm';
 import ContactFilter from './ContactFilter/ContactFilter';
 import shortid from 'shortid';
+ import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { CSSTransition } from "react-transition-group";
+import "../stylesheets/animation.css";
 
 export default class App extends Component {
   state = {
     filter: '',
-    contacts: [
-     // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-     // { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-     // { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-     // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ]
+    contacts: [],
+    showContactFilter: false,
   }
  
+  componentDidMount() {
+    console.log('Загрузка страницы! Нужна анимация!');
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  };
+
+  componentDidUpdate(prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+      }
+  };
+
   handleChange = e => {
     e.preventDefault();
     const { name, value } = e.currentTarget;
@@ -32,33 +48,22 @@ export default class App extends Component {
       number,
     };
     if (contact.name !== '') {
-      if (this.state.contacts.find(contact => contact.name === name))
-      { alert(`${contact.name} is already in contacts`); }
+      if (this.state.contacts.find(contact => contact.name === name)) {
+        toast.error('Contact is already exist');
+        console.log('Контакт уже существует! Нужна анимация!');
+        return;
+      }
       else {
-        console.log(this.state.contacts);
         this.setState(prevState => {
           return {
-            contacts: [...prevState.contacts, contact],
+
+            contacts: [contact, ...prevState.contacts],
           }
         });
+        console.log('Добавляем контакт! Нужна анимация!');
       };
     }
-  }
-
-  componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(contacts);
-
-    if (parsedContacts) {
-      this.setState({contacts: parsedContacts});
-    }
-}
-
-  componentDidUpdate(prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-      }
-}
+  };
 
   changeFilter = e => {
     this.setState({ filter: e.currentTarget.value });
@@ -69,7 +74,7 @@ export default class App extends Component {
       return {
         contacts: prevState.contacts.filter(({ id }) => id !== contactId),
       };
-    });
+    }); console.log('Контакт удален! Нужна анимация!');
   };
 
   getVisibleContacts = () => {
@@ -78,31 +83,56 @@ export default class App extends Component {
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
-  }
+  };
+
+  toggleFilter = () => {
+    this.setState(state => ({ showContactFilter: !state.showContactFilter }));
+  };
   
   render() {
-    const { contacts, filter } = this.state;
+    const { contacts, filter, showContactFilter } = this.state;
     
     const visibleContacts = this.getVisibleContacts();
 
-
     return (
-        <Layout >
-          <ContactForm
-            onSubmit={this.formSubmitHandler}
-         />
+      <Layout >
+        <ContactForm
+          onSubmit={this.formSubmitHandler}
+        />
+        
+        <ToastContainer position="top-right"
+autoClose={2500}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover/>
 
-          {contacts.length > 0 &&
-            <>
-            <ContactFilter
+        {contacts.length > 0 &&
+          <>
+          <button type="button" onClick={this.toggleFilter}>
+            {showContactFilter ? 'Hide' : "Show"} contacts filter
+          </button>
+
+          <CSSTransition
+            in={showContactFilter}
+            classNames='filter'
+            timeout={500}
+            unmountOnExit>
+              <ContactFilter
               onChange={this.changeFilter}
               value={filter}>
-            </ContactFilter>  
+              </ContactFilter>
+          </CSSTransition>
+          
           
             <ContactList
               onRemoveContact={this.removeContact}
               contacts={visibleContacts} />
-            </>}
+                        
+          </>}
         </Layout>
     )
   }

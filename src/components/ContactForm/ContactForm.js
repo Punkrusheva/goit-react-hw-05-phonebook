@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import shortid from 'shortid';
 import styles from './ContactForm.module.css';
+import { CSSTransition } from "react-transition-group";
+import "../../stylesheets/animation.css";
 
 class ContactForm extends Component {
   state = {
@@ -29,7 +31,15 @@ class ContactForm extends Component {
   render() {
     return (
       <>
-        <h2 className={styles.title}>Phonebook</h2>
+        <CSSTransition
+            in={true} appear={true}
+            classNames='logo'
+            timeout={500}
+          unmountOnExit>
+          <h1 className={styles.logo}>Phonebook</h1>
+            </CSSTransition>
+          
+       
       <form className={styles.box} onSubmit={this.handleSubmit} >
         <label htmlFor={this.nameInputId} className={styles.name}>
           Name
@@ -52,14 +62,19 @@ class ContactForm extends Component {
             onChange={this.handleChange}
             className={styles.input}
             placeholder='Enter contact number' />
-        </label>
-        <button type='submit' className={styles.button}>
-          Add contact
+          </label>
+          
+            <button type='submit' className={styles.button}>
+              Add contact
             </button>
+          
         </form>
+         
         </>
     );
   }
 }
 
 export default ContactForm;
+
+/**unmountOnExit timeout="2000" */

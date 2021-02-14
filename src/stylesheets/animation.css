@@ -1,0 +1,104 @@
+/* Анимация появления лого*/
+
+.logo-appear {
+  transform: translateX(-100%);
+}
+
+.logo-appear-active {
+  transform: translateX(0);
+  transition: transform 500ms linear;
+}
+
+/* Анимация появления/удаления контакта*/
+
+.item-enter {
+  transform: translateX(-100%);
+}
+
+.item-enter-active {
+  transform: translateX(0);
+  transition: transform 250ms linear;
+}
+
+.item-exit {
+  transform: translateX0();
+}
+
+.item-exit-active {
+  transform: translateX(-100%);
+  transition: transform 250ms linear;
+}
+
+/* Анимация фильтра (для тренеровки)*/
+
+button {
+  width: 100%;
+  height: 25px;
+  border: 1px solid blue;
+  background: blue;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.filter-enter {
+  opacity: 0;
+  transform: translateY(-50%);
+}
+
+.filter-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms linear, transform 500ms linear;
+}
+
+.filter-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.filter-exit-active {
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity 500ms linear, transform 500ms linear;
+}
+
+/* Анимация появления кнопки контакта после появления контакта(для тренеровки)*/
+
+.button-appear {
+  opacity: 0;
+}
+
+.button-appear-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 1000ms linear;
+}
+
+/*
+.appear {
+  transform: translateX(-100%);
+}
+
+.appearActive {
+  transform: translateX(0);
+  transition: transform 250ms linear;
+}*/
+/*
+.item-enter {
+  opacity: 0;
+}
+
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 500ms linear;
+}
+
+.item-exit {
+  opacity: 1;
+}
+
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 5000ms linear;
+}
+*/

@@ -22,7 +22,10 @@ label {
   margin-bottom: 5px;
   margin-top: 5px;
   width: 100%;
-  height: 20px;
+  height: 25px;
+  padding: 2px;
+  border: 1px solid gray;
+  border-radius: 5px;
 }
 
 .input:focus,
@@ -33,10 +36,10 @@ label {
 
 .button {
   width: 100%;
-  height: 20px;
+  height: 25px;
   border: 1px solid blue;
   background: blue;
-  border-radius: 3px;
+  border-radius: 5px;
   color: #fff;
 }
 
@@ -45,7 +48,29 @@ label {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.title {
-  color: blue;
+.logo {
+  font-size: 30px;
   margin: 0;
+  margin-bottom: 15px;
+  color: blue;
 }
+
+/*
+.box-enter {
+  opacity: 0;
+}
+
+.box-enter-active {
+  opacity: 1;
+  transition: opacity 5000ms linear;
+}
+
+.box-exit {
+  opacity: 1;
+}
+
+.box-exit-active {
+  opacity: 0;
+  transition: opacity 5000ms linear;
+}
+*/

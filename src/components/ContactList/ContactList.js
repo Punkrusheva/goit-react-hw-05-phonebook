@@ -1,42 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './ContactList.module.css';
-
-import { AiOutlineClose } from 'react-icons/ai';
+import ContactListItem from "../ContactListItem/ContactListItem";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import "../../stylesheets/animation.css";
 
 function ContactList({ contacts, onRemoveContact }) {
   return (
-    <ul className={styles.contactList}>
-      {
-        contacts.map(({ name, id, number}) => (
-          <li key={id} className={styles.item}>
-            <p className={styles.name}>{name}</p>
-            <p className={styles.number}>{number}</p>
-            <button
-              type='button'
-              onClick={() => onRemoveContact(id)}
-              className={styles.button}>
-              <AiOutlineClose fill="white"/>
-            </button>
-            <section className={styles.actions}>
-            </section>
-          </li>
+    <TransitionGroup component="ul" className={styles.contactList}>
+      {contacts.map(({ name, id, number }) => (
+        <CSSTransition key={id} timeout={250} classNames="item">
+          <ContactListItem name={name} key={id} number={number} onClick={() => onRemoveContact(id)}>
+          </ContactListItem>
+          </CSSTransition>
         ))
       }
-    </ul>
+      </TransitionGroup>
   );
 }
 
 ContactList.defaultProps = {
-  number: '',
-  name: '',
-  id: ''
+  contacts: [],
 };
 
 ContactList.propTypes = {
-  number: PropTypes.string,
-  name: PropTypes.string,
-  id : PropTypes.string
+  contacts: PropTypes.arrayOf(PropTypes.shape({
+    number: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string
+  }
+  ))
 };
 
 export default ContactList;
