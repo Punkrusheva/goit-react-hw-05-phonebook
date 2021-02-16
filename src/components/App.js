@@ -101,7 +101,7 @@ export default class App extends Component {
                 
         <CSSTransition in={alert}
           classNames="alert"
-          timeout={2500}
+          timeout={250}
           unmountOnExit>
           {stage => {
             console.log(stage); console.log(alert);
@@ -109,7 +109,7 @@ export default class App extends Component {
               <CSSTransition
                 in={stage === 'entered'}
                 classNames="alert"
-                timeout={2500}  >
+                timeout={250}  >
                 <AlertError text={alertText}/>
               </CSSTransition>)
           }}
