@@ -13,6 +13,7 @@ export default class App extends Component {
     filter: '',
     contacts: [],
     alert: false,
+    alertText: '',
   }
  
   componentDidMount() {
@@ -49,7 +50,7 @@ export default class App extends Component {
     };
     if (contact.name !== '') {
       if (this.state.contacts.find(contact => contact.name === name)) {
-        this.setState(state => ({ alert: true}));
+        this.setState(state => ({ alert: true, alertText: 'Contact is already exist'}));
         console.log(this.state.alert);
         setTimeout(afertFalse, 2500);       
       }
@@ -61,7 +62,10 @@ export default class App extends Component {
           }
         });
       };
-    }
+    } else {
+      this.setState(state => ({ alert: true, alertText: 'Contact details empty'}));
+        console.log(this.state.alert);
+        setTimeout(afertFalse, 2500); }
   };
 
   changeFilter = e => {
@@ -85,7 +89,7 @@ export default class App extends Component {
   };
 
   render() {
-    const { contacts, filter, alert } = this.state;
+    const { contacts, filter, alert, alertText} = this.state;
     
     const visibleContacts = this.getVisibleContacts();
 
@@ -106,7 +110,7 @@ export default class App extends Component {
                 in={stage === 'entered'}
                 classNames="alert"
                 timeout={2500}  >
-                <AlertError />
+                <AlertError text={alertText}/>
               </CSSTransition>)
           }}
         </CSSTransition>

@@ -2,10 +2,10 @@ import React from 'react';
 import '../../stylesheets/animation.css';
 import styles from "./AlertError.module.css";
 
-const AlertError = () => (
+const AlertError = ({text}) => (
     <>
         <div className={styles.alert}>
-            Contact is already exist
+            {text}
         </div>
     </>
 );
